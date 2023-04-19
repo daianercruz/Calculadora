@@ -2,6 +2,31 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family: helvetica;
+
+}
+
+body{
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4em;
 
 
+}
+
+#cal{
+width: 300px;
+padding: .4em;
+background-color: #c4c4c4;
+color: black;
+display: flex;
+flex-direction: column;
+
+}
+
+#cal h3{
+    font-size: .9em;
+    font-weight: 400;
 }
