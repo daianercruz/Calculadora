@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: #333;
+    background: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,18 +37,53 @@ flex-direction: column;
 
 #operacao-prev{
     color:#777;
-    padding: 0.1em;
-    overflow-wrap: break-word;
+   
 
+}
+
+#operacao-prev,
+#operacao-corrente{
+    overflow-wrap: break-word;
+    padding: 0.1em;
+    min-height: 1.5em;
 }
 
 #operacao-corrente{
     font-size: 3em;
     font-weight: 600;
+  
 }
 
 #botoes{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 4px;
+}
+
+#botoes button{
+    border: 1px solid transparent;
+    border-radius: 0;
+    height: 4em;
+    font-size: 1.2em;
+    background-color: #dbdbdb;
+    cursor: pointer;
+
+}
+
+#botoes .numeros{
+    background-color: #f3f3f3;
+}
+
+#botoes button:hover{
+    background-color: #bababa;
+    border-color: #999;
+}
+
+#botoes #igual{
+    grid-column: span 2;
+    background-color: aquamarine;
+}
+
+#botoes #igual:hover{
+     background-color: rgb(85, 167, 139);
 }
