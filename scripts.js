@@ -11,6 +11,11 @@ class Calculator {
 }
 //Criando a tela da calculadora 
 addDigit(digit){
+//operacao para verificar se já tem um ponto
+if(digit === "." && this.currentOperationText.innerText.includes(".")){
+    return;
+}
+
 
 
 this.currentOperation = digit;
