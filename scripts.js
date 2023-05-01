@@ -16,15 +16,37 @@ if(digit === "." && this.currentOperationText.innerText.includes(".")){
     return;
 }
 
-
-
 this.currentOperation = digit;
-
 this.updateScreen();
 }
 
-updateScreen(){
-    this.currentOperationText.innerText += this.currentOperation;
+//processos de operações da calculadora 
+processOperation(operation){
+    
+let operationValue
+let previous = +this.previousOperationText.innerText.split(" ")[0];
+const current = +this.currentOperationText.innerText;
+
+switch(operation){
+    case "+":
+        operationValue = previous + current;
+        this.updateScreen(operationValue,operation,current,previous);
+    break;
+    default:
+        return;
+}
+}
+
+updateScreen(operationValue=null,operation=null, current=null,previous=null){
+    if (operationValue === null) {
+        this.currentOperationText.innerText += this.currentOperation;
+      } else {
+        if (previous === 0) {
+          operationValue = current;
+        }
+        this.previousOperationText.innerText = `${operationValue} ${operation}`;
+        this.currentOperationText.innerText = "";
+      }
 }
 }
 
@@ -39,7 +61,7 @@ buttons.forEach((btn)=>{
         calc.addDigit(value)
 
     }else{
-        console.log("op:" + value);
+        calc.processOperation(value);
     }
 
    })
