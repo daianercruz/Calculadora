@@ -22,6 +22,12 @@ this.updateScreen();
 
 //processos de operações da calculadora 
 processOperation(operation){
+    if (this.currentOperationText.innerText === "" && operation !== "C") {
+        if (this.previousOperationText.innerText !== "") {
+          this.changeOperation(operation);
+        }
+        return;
+      }
     
 let operationValue
 let previous = +this.previousOperationText.innerText.split(" ")[0];
@@ -31,6 +37,30 @@ switch(operation){
     case "+":
         operationValue = previous + current;
         this.updateScreen(operationValue,operation,current,previous);
+    break;
+    case "-":
+        operationValue = previous - current;
+        this.updateScreen(operationValue,operation,current,previous);
+    break;
+    case "*":
+        operationValue = previous * current;
+        this.updateScreen(operationValue,operation,current,previous);
+    break;
+    case "/":
+        operationValue = previous / current;
+        this.updateScreen(operationValue,operation,current,previous);
+    break;
+    case "DEL":
+        this.processOperation();
+    break;
+    case "CE":
+        this.processClearCurrentOperator();
+    break;
+    case "C":
+        this.processClearOperator();
+    break;
+    case "=":
+        this.processEqualOperator();
     break;
     default:
         return;
@@ -47,8 +77,40 @@ updateScreen(operationValue=null,operation=null, current=null,previous=null){
         this.previousOperationText.innerText = `${operationValue} ${operation}`;
         this.currentOperationText.innerText = "";
       }
-}
-}
+    }
+    changeOperation(operation) {
+      const mathOperations = ["*", "-", "+", "/"];
+  
+      if (!mathOperations.includes(operation)) {
+        return;
+      }
+  
+      this.previousOperationText.innerText =
+        this.previousOperationText.innerText.slice(0, -1) + operation;
+    }
+  
+    processDelOperator() {
+      this.currentOperationText.innerText =
+        this.currentOperationText.innerText.slice(0, -1);
+    }
+  
+    processClearCurrentOperator() {
+      this.currentOperationText.innerText = "";
+    }
+  
+    // limpar a operacao
+    processClearOperator() {
+      this.currentOperationText.innerText = "";
+      this.previousOperationText.innerText = "";
+    }
+    processEqualOperator() {
+  let operation = this.previousOperationText.innerText.split(" ")[1];
+  
+      this.processOperation(operation);
+    }
+  }
+
+
 
 const calc = new Calculator(previousOperationText,currentOperationText);
 
@@ -64,7 +126,7 @@ buttons.forEach((btn)=>{
         calc.processOperation(value);
     }
 
-   })
+   });
 
 
 });
